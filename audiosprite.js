@@ -53,7 +53,7 @@ module.exports = function(files) {
   }
   
   let offsetCursor = 0
-  const wavArgs = ['-ar', opts.samplerate, '-ac', opts.channels, '-f', 's16le']
+  const wavArgs = ['-ar', opts.samplerate, '-ac', opts.channels, '-f', 's24le']
   const tempFile = mktemp('audiosprite')
   
   opts.logger.debug('Created temporary file', { file: tempFile })
@@ -192,7 +192,7 @@ module.exports = function(files) {
   function exportFile(src, dest, ext, opt, store, cb) {
     var outfile = dest + '.' + ext;
     
-    spawn('ffmpeg',['-y', '-ar', opts.samplerate, '-ac', opts.channels, '-f', 's16le', '-i', src]
+    spawn('ffmpeg',['-y', '-ar', opts.samplerate, '-ac', opts.channels, '-f', 's24le', '-i', src]
       .concat(opt).concat(outfile))
       .on('exit', function(code, signal) {
         if (code) {
